@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>RANDOM PHOTO DAKKU</title>
+<style>
+:root{--ink:#3d3545;--muted:#8c8292;--pink:#f4dce8;--lav:#e9e3f6;--paper:#fffdfd;--line:#eee5ed}
+*{box-sizing:border-box}body{margin:0;background:linear-gradient(145deg,#fbf4f8,#f5f1fb 55%,#f8f6ef);font-family:system-ui,-apple-system,'Noto Sans KR',sans-serif;color:var(--ink);min-height:100vh;padding:26px 14px 44px}
+main{max-width:760px;margin:auto}.top{text-align:center;margin:12px 0 24px}.eyebrow{font-size:11px;letter-spacing:.28em;color:#a48aa0}.top h1{font-family:Georgia,serif;font-size:clamp(30px,7vw,48px);letter-spacing:.04em;margin:8px 0 5px}.top p{font-size:13px;color:var(--muted);margin:0}
+.panel{background:rgba(255,255,255,.88);border:1px solid #fff;border-radius:24px;padding:20px;box-shadow:0 12px 35px #6d526514;margin-bottom:15px}
+.fields{display:grid;grid-template-columns:1fr 1fr;gap:10px}.field label{display:block;font-size:12px;color:var(--muted);margin:0 0 6px 4px}.field input{width:100%;border:1px solid var(--line);border-radius:12px;padding:12px;font:inherit;color:var(--ink);background:#fff}
+.photo{border-radius:18px;overflow:hidden;background:#f3edf3;min-height:220px;display:flex;align-items:center;justify-content:center;position:relative}.photo img{width:100%;height:360px;object-fit:cover;display:block}.placeholder{text-align:center;padding:48px 15px;color:#9d8fa0}.placeholder b{display:block;font-size:18px;margin-bottom:6px;color:#766879}.tag{display:inline-block;background:#f5e8ef;color:#986f88;padding:6px 12px;border-radius:99px;font-size:12px;margin:0 0 10px}.photoInfo{text-align:center;padding:17px 5px 3px}.photoInfo h2{font-size:22px;margin:4px 0 5px}.photoInfo p{font-size:13px;color:var(--muted);margin:0;line-height:1.6}
+.actions{display:flex;gap:9px;flex-wrap:wrap;margin-top:17px}.btn{border:0;border-radius:14px;padding:13px 17px;font:600 14px inherit;cursor:pointer;flex:1;min-width:120px}.primary{background:#806b91;color:white}.secondary{background:#f2eaf2;color:#705b78}.dark{background:#4b4051;color:#fff}.btn:disabled{opacity:.45;cursor:default}.history h3{font-size:14px;margin:0 0 10px}.historyList{display:flex;gap:8px;flex-wrap:wrap}.chip{font-size:12px;background:#f7f1f6;border-radius:99px;padding:7px 10px;color:#766879}.hint{text-align:center;font-size:11px;color:#a095a2;line-height:1.7;margin-top:15px}
+@media(max-width:480px){body{padding:18px 11px 32px}.panel{padding:15px}.photo img{height:290px}.btn{min-width:100%;}}
+</style>
+</head>
+<body><main>
+<header class="top"><div class="eyebrow">A LITTLE INSPIRATION FOR YOUR PAGE</div><h1>RANDOM PHOTO DAKKU</h1><p>같은 사진, 다른 다꾸 · 오늘의 영감을 랜덤으로 뽑아봐요 ♡</p></header>
+<section class="panel">
+<div class="fields"><div class="field"><label for="round">ROUND</label><input id="round" placeholder="예: 1회차"></div><div class="field"><label for="picker">PHOTO PICKER</label><input id="picker" placeholder="사진 뽑는 사람"></div></div>
+</section>
+<section class="panel">
+<div class="photo" id="photo"><div class="placeholder"><b>오늘의 랜덤 사진은?</b>아래 버튼을 눌러 사진을 뽑아보세요 ✦</div></div>
+<div class="photoInfo" id="photoInfo"><span class="tag">READY TO DRAW</span><h2>PHOTO INSPIRATION</h2><p>음식 · 카페 · 풍경 · 동물 · 꽃 · 소품 등<br>다양한 분위기의 사진이 랜덤으로 등장해요.</p></div>
+<div class="actions"><button class="btn primary" id="draw">✦ 랜덤 사진 뽑기</button><button class="btn secondary" id="again" disabled>다시 뽑기</button><button class="btn dark" id="confirm" disabled>사진 확정 & 공유 문구</button></div>
+</section>
+<section class="panel history"><h3>♡ 이번에 뽑은 사진</h3><div class="historyList" id="history"><span class="chip">아직 뽑은 사진이 없어요</span></div></section>
+<p class="hint">사진은 Unsplash에서 불러옵니다. 사진 표시에는 인터넷 연결이 필요해요.<br>사진을 그대로 따라 하기보다 색감과 분위기에서 영감을 얻어 자유롭게 꾸며보세요.</p>
+</main>
+<script>
+const photos=[
+['햇살 가득한 카페','카페 · 따뜻한 분위기','photo-1445116572660-236099ec97a0'],['딸기 디저트','음식 · 달콤한 무드','photo-1488477181946-6428a0291777'],['꽃이 가득한 정원','꽃 · 내추럴','photo-1490623970972-ae8bb3da443e'],['비 오는 거리','풍경 · 차분한 감성','photo-1519692933481-e162a57d6721'],['포근한 고양이','동물 · 포근함','photo-1513360371669-4adf3dd7dff8'],['빈티지 소품','소품 · 빈티지','photo-1490312278390-ab64016e0aa9'],['푸른 바다','여행 · 청량함','photo-1500375592092-40eb2168fd21'],['아늑한 책상','일상 · 따뜻함','photo-1499951360447-b19be8fe80f5'],['레몬과 과일','음식 · 상큼함','photo-1519996529931-28324d3a630e'],['숲속 산책길','자연 · 싱그러운','photo-1448375240586-882707db888b'],['꽃다발','꽃 · 사랑스러움','photo-1494972308805-463bc619d34e'],['여행의 순간','여행 · 자유로움','photo-1476514525535-07fb3b4ae5f1'],['따뜻한 차 한 잔','티타임 · 힐링','photo-1544787219-7f47pcf0a'],['파스텔 디저트','디저트 · 러블리','photo-1565958011703-44f9829ba187'],['햇살 드는 방','공간 · 포근함','photo-1616486338812-3dadae4b4ace']
+];
+let current=null,used=[];
+const $=id=>document.getElementById(id);
+function draw(){let pool=photos.filter((_,i)=>!used.includes(i));if(!pool.length){used=[];pool=photos.slice()}const item=pool[Math.floor(Math.random()*pool.length)];const idx=photos.indexOf(item);used.push(idx);current=item;const url=`https://images.unsplash.com/${item[2]}?auto=format&fit=crop&w=1200&q=85`;$('photo').innerHTML=`<img src="${url}" alt="${item[0]}" onerror="this.parentElement.innerHTML='<div class=placeholder><b>사진을 불러오지 못했어요</b>인터넷 연결을 확인하고 다시 뽑아주세요.</div>'">`;$('photoInfo').innerHTML=`<span class="tag">${item[1]}</span><h2>${item[0]}</h2><p>이 사진의 색감과 분위기에서 영감을 얻어<br>나만의 다꾸로 표현해 보세요!</p>`;$('again').disabled=false;$('confirm').disabled=false;updateHistory()}
+function updateHistory(){$('history').innerHTML=used.slice().reverse().map(i=>`<span class="chip">${photos[i][0]}</span>`).join('')}
+function share(){if(!current)return;const round=$('round').value.trim()||'이번 회차';const picker=$('picker').value.trim()||'참여자';const msg=`[랜덤 사진 다꾸] ♡\n${round} · 사진 뽑는 사람: ${picker}\n오늘의 사진 주제: ${current[0]} (${current[1]})\n\n모두 같은 사진에서 영감을 얻어 각자의 스타일로 다꾸해 주세요! 사진을 그대로 따라 하지 않아도 되고, 색감과 분위기를 자유롭게 표현하면 됩니다.\n\n사진: https://images.unsplash.com/${current[2]}?auto=format&fit=crop&w=1200&q=85`;
+if(navigator.share){navigator.share({title:'랜덤 사진 다꾸',text:msg}).catch(()=>copy(msg))}else copy(msg)}
+function copy(t){if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(t).then(()=>alert('공유 문구를 복사했어요!')).catch(()=>fallback(t))}else fallback(t)}function fallback(t){const a=document.createElement('textarea');a.value=t;document.body.appendChild(a);a.select();document.execCommand('copy');a.remove();alert('공유 문구를 복사했어요!')}
+$('draw').onclick=draw;$('again').onclick=draw;$('confirm').onclick=share;
+</script></body></html>
